@@ -1,9 +1,8 @@
-FROM alpine
+FROM node:slim
 LABEL maintainer="qmuhammad144@gmail.com"
-RUN apk add --update nodejs npm
-COPY . /src
-WORKDIR /src
+WORKDIR /app
+COPY . /app
 RUN npm install
 ENV CREATEDBY="Muhammad Qasim"
-EXPOSE 8080
+EXPOSE 5050
 ENTRYPOINT ["node", "./app.js"]

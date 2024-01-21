@@ -74,10 +74,10 @@ app.post("/resetpassword", Authenticate.resetPassword);
 
 // app.post("/getcurrentUser", Authenticate.currentUser);
 
-// app.use(express.static("./build"));
-// app.use("*", (req, res) => {
-//   res.sendfile("./build/index.html");
-// });
+app.use(express.static("./build"));
+app.use("*", (req, res) => {
+  res.sendfile("./build/index.html");
+});
 
 connectDb();
 const PORT = process.env.PORT || 5050;
@@ -92,32 +92,7 @@ const io = socket(server, {
   },
 });
 
-// io.on("connection", (socket) => {
-//   console.log(socket);
 
-//   socket.on("join_room", (data) => {
-//     console.log("join_room...", data);
-//     socket.join(data);
-//   });
-
-//   socket.on("send_message", (data) => {
-//     console.log("send_message...", data); // after join chat room show all chat messages first
-//     socket.to(data.room).emit("receive_message", data);
-//   });
-
-//   // socket.io("typing1", (msj) => {
-//   //   io.emit("typing", ms);
-//   // });
-
-//   socket.on("sendTyping", (data) => {
-//     console.log(data.name + " is typing in " + data.room);
-//     io.to(data.room).emit("typing", data);
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("user disconnect");
-//   });
-// });
 
 io.on("connection", (socket) => {
   socket.emit("your id", socket.id);
